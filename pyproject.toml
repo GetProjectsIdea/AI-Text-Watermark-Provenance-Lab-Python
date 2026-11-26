@@ -1,0 +1,35 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "wmlab"
+version = "1.0.0"
+description = "AI text watermarking and content-provenance experiments: green-list (KGW) and Gumbel watermarks with z-score detection, robustness and false-positive studies, C2PA-style Ed25519-signed manifests for text and images. CPU-only, CLI + Flask UI."
+readme = "README.md"
+license = { text = "MIT" }
+authors = [{ name = "Pardeep Patel" }]
+requires-python = ">=3.10"
+dependencies = ["numpy>=1.24", "cryptography>=41", "Pillow>=10", "matplotlib>=3.7", "Flask>=3.0"]
+keywords = ["watermarking", "llm", "ai-detection", "content-provenance", "c2pa", "ed25519", "research"]
+
+[project.optional-dependencies]
+dev = ["pytest>=8.0"]
+hf = ["torch>=2.2", "transformers>=4.45"]
+
+[project.scripts]
+wmlab = "wmlab.cli:main"
+
+[project.urls]
+Homepage = "https://getprojects.org/ai-text-watermarking-python/"
+Source = "https://github.com/GetProjectsIdea/AI-Text-Watermark-Provenance-Lab-Python"
+
+[tool.setuptools]
+packages = ["wmlab", "wmlab.backends"]
+
+[tool.setuptools.package-data]
+wmlab = ["templates/*.html", "static/*.css", "static/*.js", "data/*.txt.gz", "data/NOTICE.md"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["."]

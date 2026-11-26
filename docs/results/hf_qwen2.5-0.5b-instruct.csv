@@ -1,0 +1,49 @@
+prompt,kind,tokens,scored,z,detected
+0,watermarked,159,156,9.245,True
+0,unwatermarked,160,155,1.53,False
+0,watermarked -> LLM paraphrase,35,34,1.386,False
+0,watermarked -> first 60 tokens,60,59,3.082,False
+1,watermarked,160,158,8.727,True
+1,unwatermarked,160,156,0.555,False
+1,watermarked -> LLM paraphrase,135,134,1.496,False
+1,watermarked -> first 60 tokens,60,59,3.984,False
+2,watermarked,160,155,4.498,True
+2,unwatermarked,160,153,1.447,False
+2,watermarked -> LLM paraphrase,236,219,-0.741,False
+2,watermarked -> first 60 tokens,60,59,1.879,False
+3,watermarked,160,158,7.257,True
+3,unwatermarked,160,159,0.962,False
+3,watermarked -> LLM paraphrase,151,146,0.096,False
+3,watermarked -> first 60 tokens,60,59,3.984,False
+4,watermarked,160,158,12.034,True
+4,unwatermarked,160,157,-0.046,False
+4,watermarked -> LLM paraphrase,138,135,1.441,False
+4,watermarked -> first 60 tokens,60,58,8.036,True
+5,watermarked,160,154,6.979,True
+5,unwatermarked,160,150,-1.226,False
+5,watermarked -> LLM paraphrase,163,159,2.61,False
+5,watermarked -> first 60 tokens,60,58,2.881,False
+6,watermarked,160,152,6.556,True
+6,unwatermarked,160,154,-0.837,False
+6,watermarked -> LLM paraphrase,187,180,0.0,False
+6,watermarked -> first 60 tokens,60,59,3.082,False
+7,watermarked,160,158,8.727,True
+7,unwatermarked,160,158,0.827,False
+7,watermarked -> LLM paraphrase,161,159,8.654,True
+7,watermarked -> first 60 tokens,60,59,4.886,True
+8,watermarked,160,157,10.46,True
+8,unwatermarked,160,156,1.479,False
+8,watermarked -> LLM paraphrase,152,148,3.037,False
+8,watermarked -> first 60 tokens,60,59,5.487,True
+9,watermarked,160,157,11.381,True
+9,unwatermarked,160,156,1.294,False
+9,watermarked -> LLM paraphrase,132,128,-0.816,False
+9,watermarked -> first 60 tokens,60,59,6.389,True
+10,watermarked,160,156,10.909,True
+10,unwatermarked,159,158,-0.827,False
+10,watermarked -> LLM paraphrase,152,149,4.115,True
+10,watermarked -> first 60 tokens,60,59,4.284,True
+11,watermarked,160,154,7.909,True
+11,unwatermarked,160,156,0.37,False
+11,watermarked -> LLM paraphrase,136,129,-0.254,False
+11,watermarked -> first 60 tokens,60,59,4.284,True

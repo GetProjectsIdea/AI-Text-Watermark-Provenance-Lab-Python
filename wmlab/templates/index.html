@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>wmlab · AI text watermark &amp; provenance lab</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+<script src="{{ url_for('static', filename='app.js') }}" defer></script>
+</head>
+<body>
+<header class="top">
+  <div class="brand"><span class="logo">wm</span>lab <small>AI text watermark &amp; provenance lab · v{{ version }}</small></div>
+  <div class="controls">
+    <label>Scheme <select id="scheme"><option value="kgw">KGW green list</option><option value="gumbel">Gumbel (distortion-free)</option></select></label>
+    <label>&gamma; <input id="gamma" type="number" min="0.05" max="0.95" step="0.05" value="0.25"></label>
+    <label>&delta; <input id="delta" type="number" min="0" max="10" step="0.5" value="2"></label>
+    <span class="pill {{ 'warn' if demo_key else 'ok' }}">{{ 'demo key (set WMLAB_KEY)' if demo_key else 'private key from WMLAB_KEY' }}</span>
+  </div>
+</header>
+<nav class="tabs">
+  <button class="tab active" data-tab="generate">Generate</button>
+  <button class="tab" data-tab="detect">Detect</button>
+  <button class="tab" data-tab="attack">Attack</button>
+  <button class="tab" data-tab="provenance">Provenance</button>
+</nav>
+<main>
+  <section class="panel active" id="generate">
+    <p class="hint">A small trigram language model (trained on public-domain novels) writes text on your CPU. With the watermark on, a secret key nudges each word choice towards a pseudo-random &ldquo;green list&rdquo;.</p>
+    <div class="row"><input id="gen-prompt" value="It was a dark and stormy night, and" aria-label="prompt">
+      <input id="gen-tokens" type="number" min="10" max="400" value="150" class="small" aria-label="tokens">
+      <label class="check"><input type="checkbox" id="gen-wm" checked> watermark</label>
+      <button class="primary" id="gen-go">Generate</button></div>
+    <div id="gen-out"></div>
+  </section>
+  <section class="panel" id="detect">
+    <p class="hint">Paste any text. The detector re-computes the green list for every word from the key and the previous word, counts green words and runs a one-proportion z-test. It never needs the language model.</p>
+    <textarea id="det-text" rows="8" placeholder="Paste text here"></textarea>
+    <div class="row"><button class="primary" id="det-go">Detect watermark</button><button id="det-human">Load a human paragraph</button></div>
+    <div id="det-out"></div>
+  </section>
+  <section class="panel" id="attack">
+    <p class="hint">Edit the text the way a user or an attacker might, then re-run detection. Zero-width and homoglyph tricks are undone by normalisation before detection.</p>
+    <textarea id="att-text" rows="6" placeholder="Paste watermarked text (or generate some first)"></textarea>
+    <div class="row"><select id="att-type">{% for a in attacks %}<option value="{{ a }}"{% if a == 'substitute' %} selected{% endif %}>{{ a }}</option>{% endfor %}</select>
+      <label>rate <input id="att-rate" type="number" min="0" max="1" step="0.05" value="0.3" class="small"></label>
+      <button class="primary" id="att-go">Apply attack + detect</button></div>
+    <div id="att-out"></div>
+  </section>
+  <section class="panel" id="provenance">
+    <p class="hint">C2PA-style provenance: sign a SHA-256 hash of the text with Ed25519, then verify. Change one character and the hard binding breaks. (Teaching format, not a conformant C2PA manifest.)</p>
+    <textarea id="prov-text" rows="6" placeholder="Text to sign"></textarea>
+    <div class="row"><select id="prov-source"><option value="ai">AI-generated (trainedAlgorithmicMedia)</option><option value="ai-composite">AI + human (composite)</option><option value="human">human edits</option></select>
+      <label class="check"><input type="checkbox" id="prov-wm" checked> text is watermarked</label>
+      <button class="primary" id="prov-sign">Sign</button><button id="prov-verify">Verify</button><button id="prov-tamper">Tamper 1 word</button></div>
+    <div class="grid2"><textarea id="prov-manifest" rows="14" placeholder="Signed manifest (JSON)"></textarea><div id="prov-out"></div></div>
+  </section>
+</main>
+<footer>Research &amp; teaching code. Detection results are statistical evidence about one key, never proof of who wrote a text. · <a href="https://getprojects.org/ai-text-watermarking-python/" target="_blank" rel="noopener">Tutorial</a></footer>
+</body>
+</html>

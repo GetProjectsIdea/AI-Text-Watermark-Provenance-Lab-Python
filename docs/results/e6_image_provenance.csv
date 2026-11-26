@@ -1,0 +1,9 @@
+transform,n,hard_binding_valid,soft_binding_match,mean_dhash_distance
+unchanged (metadata stripped),20,1.0,1.0,0.0
+png re-save,20,1.0,1.0,0.0
+jpeg q95,20,0.0,1.0,0.1
+jpeg q70,20,0.0,1.0,0.35
+resize 50%,20,0.0,1.0,0.05
+crop 10%,20,0.0,0.35,11.75
+brightness +20%,20,0.0,1.0,0.9
+different image,20,0.0,0.0,29.15
